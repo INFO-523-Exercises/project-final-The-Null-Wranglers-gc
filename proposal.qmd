@@ -1,5 +1,5 @@
 ---
-title: "Proposal title"
+title: "Descriptive analysis of grade outcomes"
 subtitle: "Proposal"
 format: html
 editor: visual
@@ -18,13 +18,27 @@ library(tidyverse)
 #| message: false
 ```
 
+U of A Data set
+
+...
+
+...
+
+...
+
 A brief description of your dataset including its provenance, dimensions, etc. as well as the reason why you chose this dataset.
 
 Make sure to load the data and use inline code for some of this information.
 
 ## Questions
 
-The two questions you want to answer.
+1.  What if any patterns or relationships exist between colleges, departments, or course level and grade outcomes for enrolled students?
+
+2.  Can a predictive model be developed that accurately forecasts grade outcomes based on course attributes?
+
+#### **Why these questions?**
+
+Low student success rates have a profound impact on an educational institution\'s academic offerings, their ability to provide financial support and scholarships, as well as their overall professional reputation. The impacts of covid-19 on student success is a concern in higher education. Thus, it is important that this vital issue be addressed with unique strategies and innovative plans that are based on research that is data driven.
 
 ## Analysis plan
 

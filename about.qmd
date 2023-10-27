@@ -1,15 +1,17 @@
 ---
-title: "About"
+title: "Descriptive analysis of grade outcomes"
 format: html
 editor: visual
 ---
 
-This project was developed by **\[Team Name\]** For [INFO 523 - Data Mining and Discovery](https://datamineaz.org/) at the University of Arizona, taught by Dr. Greg Chism. The team is comprised of the following team members.
+This project was developed by **\[The Null Wranglers\]** For [INFO 523 - Data Mining and Discovery](https://datamineaz.org/) at the University of Arizona, taught by Dr. Greg Chism. The team is comprised of the following team members.
 
--   Team member 1: One sentence description of Team member 1 (e.g., year, major, etc.).
+-   Krist Manasil : PhD in Infromation, First Year
 
--   Team member 2: One sentence description of Team member 2 (e.g., year, major, etc.).
+-   Dong Chen : PhD in Higher Education , Second Year
 
--   Team member 3: One sentence description of Team member 3 (e.g., year, major, etc.).
+-   Utkarsha Patil : MS in Data Science, First Year
 
--   Team member 4: One sentence description of Team member 4 (e.g., year, major, etc.).
+-   Anajni Sowmya Bollapragada : MS in Data Science, First Year
+
+-   Rohit Hemaraja : MS in Data Science, First Year
