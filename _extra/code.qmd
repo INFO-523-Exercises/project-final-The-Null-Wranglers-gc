@@ -13,14 +13,115 @@ library(lubridate)
 
 ## Dataset Setup
 ```{r}
+# set working directory
+setwd("~/R/project-final-The-Null-Wranglers")
+# read in data
+dew_data <- read.csv("data/DEW Rates.csv")
+summary(dew_data)
 
+```
+Data Cleaning
+```{r}
+# the total student count is currently a char - convert to an int
+# remove commas then convert
+dew_data$Total.Student.Count <- as.integer(gsub(",", "", dew_data$Total.Student.Count))
+```
+
+```{r}
+# remove courses that have a incomplete that is greater than 50%
+dew_data <- dew_data %>% filter(Per.Ungraded..Incomplete < 50)
+```
+
+```{r}
+# Remove winter semester
+dew_data <- dew_data %>% 
+  filter(TERM_LD != "Winter 2020", TERM_LD != "Winter 2018", TERM_LD != "Winter 2019")
+```
+
+```{r}
+# remove courses that have less than 5 students
+dew_data <- dew_data %>% 
+  filter(Total.Student.Count > 5)
+```
+
+```{r}
+# remove all graduate level courses as we will only consider undergraduate course 
+dew_data <- dew_data %>% 
+  filter(Course.Level != "Graduate")
+```
+```{r}
+# remove summer courses
+dew_data <- dew_data %>% filter(TERM_LD != "Summer 2021", TERM_LD != "Summer 2020", TERM_LD != "Summer 2019")
+                              
+```
+
+```{r}
+# remove courses that are independent study/directed research style courses
+dew_data <- dew_data %>% filter(Course.Description != "Internship",
+                                Course.Description != "Directed Research",
+                                Course.Description != "Independent Study",
+                                Course.Description != "Senior Capstone",
+                                Course.Description != "Honors Thesis",
+                                Course.Description != "Special Topics",
+                                Course.Description != "Practicum",
+                                Course.Description != "Honors Independent Study", 
+                                Course.Description != "Honors Colloquium",
+                                Course.Description != "Senior Mentoring Workshop", 
+                                Course.Description != "Preceptorship",
+                                Course.Description != "Honors Preceptorship",
+                                Course.Description != "Honors Directed Research")
 
 ```
 
 
+```{r}
+# inspect data
+summary(dew_data)
+```
+Should we remove some of these columns? 
 
 ## Plots
 ```{r}
+# total number of courses per semester?
+dew_data %>% 
+  group_by(TERM_LD) %>% 
+  ggplot(aes( x = TERM_LD,
+              fill = TERM_LD))+
+  geom_bar(position = "dodge")
+```
 
+```{r}
+# courses by level
+dew_data %>% 
+  group_by(TERM_LD, Course.Level) %>% 
+  ggplot(aes( x = TERM_LD,
+              fill = Course.Level))+
+  geom_bar(position = "dodge")
+```
+We need to explain why there is so many more upper division courses
+
+```{r}
+# mean and median of each semester
 
 ```
+
+
+```{r}
+# mean enrollment for course level by semester
+
+```
+
+```{r}
+# facet wrap of colleges of upper and lower per semester
+```
+
+```{r}
+# facet wrap of colleges of mean enrollment per semester
+
+```
+
+```{r}
+# facet wrap of departments in top enrollemnt college of upper and lower per semester
+
+```
+
