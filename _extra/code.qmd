@@ -101,27 +101,32 @@ dew_data %>%
 We need to explain why there is so many more upper division courses
 
 ```{r}
-# mean and median of each semester
+#1 plot of enrollment grouped by division for each semester - Rohit
+```
+
+
+```{r}
+#2 mean and median of each semester - Rohit
 
 ```
 
 
 ```{r}
-# mean enrollment for course level by semester
+#3 mean enrollment for course level by semester - Anjani
 
 ```
 
 ```{r}
-# facet wrap of colleges of upper and lower per semester
+#4 facet wrap of colleges of upper and lower per semester - Kristi
 ```
 
 ```{r}
-# facet wrap of colleges of mean enrollment per semester
+#5 facet wrap of colleges of mean enrollment per semester <- Utkarsha
 
 ```
 
 ```{r}
-# facet wrap of departments in top enrollemnt college of upper and lower per semester
+#6 facet wrap of departments in top enrollemnt college of upper and lower per semester <- Dong
 
 ```
 

@@ -18,17 +18,43 @@ library(tidyverse)
 #| message: false
 ```
 
-U of A Data set
+DEW Counts Data Set
 
-...
+The DEW counts data set contains information about the breakdown of grade value outcomes during the academic years of 18-19, 19-20, and 20-21. The consists of 35697 observations with 23 variables per observation. Below is a description of the data:
 
-...
+| Column Name                  | Column Description                                                                         |
+|------------------------------|--------------------------------------------------------------------------------------------|
+| College                      | Identifies the college at the University of Arizona                                        |
+| Department                   | Identifies which department within given college                                           |
+| Subject.Code                 | Identifies the subject of the course                                                       |
+| Catalog.Number               | Identifies the catalog number of the course                                                |
+| Course.Description           | Provides the title of the course                                                           |
+| Course.Level                 | Identifies if the course is lower, upper or graduate division                              |
+| Total.Student.Count          | The total enrollment for the course                                                        |
+| D_GRADE_COUNT                | The number of enrolled students that earned a D grade in the course                        |
+| FAIL_GRADE_COUNT             | The number of enrolled students that earned a E(Fail) grade in the course                  |
+| WITHDRAW_GRADE_COUNT         | The number of enrolled students that withdrew from the course                              |
+| DEW_COUNT                    | The total of D, E, and W grades earned by enrolled students in the course                  |
+| PASS_GRADE_COUNT             | The number of enrolled students that received a C or greater grade value                   |
+| WITHDRAW_FULLMED_GRADE_COUNT | The number of enrolled students that took a full medical withdrawal                        |
+| INCOMPLETE_UNGRADED_COUNT    | The number of enrolled students that did not receive grades                                |
+| TERM_LD                      | The semester that the course was offered                                                   |
+| ACAD_YR_SID                  | The academic year that the course was offered                                              |
+| Percent.D.Grade              | The percentage of enrolled students that received a D grade in the course                  |
+| Percent.E.Grade              | The percentage of enrolled students that received a E grade in the course                  |
+| Percent.W.Grade              | The percentage of enrolled students that received a W grade in the course                  |
+| Percent.DEW                  | The percentage of enrolled students that received a D, E, or W grade in the course         |
+| Percent.Passed               | The percentage of enrolled students that received a C or greater grade value in the course |
+| Per.Full..Medical.Withdrawal | The percentage of enrolled students that had a full medical withdraw in the course         |
+| Per.Ungraded..Incomplete     | The percentage of enrolled students that did not receive a grade value in the course       |
 
-...
-
-A brief description of your dataset including its provenance, dimensions, etc. as well as the reason why you chose this dataset.
-
-Make sure to load the data and use inline code for some of this information.
+```{r}
+# set working directory
+setwd("~/R/project-final-The-Null-Wranglers")
+# read in data
+dew_counts <- read.csv("data/DEW Rates.csv")
+dew_counts
+```
 
 ## Questions
 
@@ -38,8 +64,40 @@ Make sure to load the data and use inline code for some of this information.
 
 #### **Why these questions?**
 
-Low student success rates have a profound impact on an educational institution\'s academic offerings, their ability to provide financial support and scholarships, as well as their overall professional reputation. The impacts of covid-19 on student success is a concern in higher education. Thus, it is important that this vital issue be addressed with unique strategies and innovative plans that are based on research that is data driven.
+Low student success rates have a profound impact on an educational institution's academic offerings, their ability to provide financial support and scholarships, as well as their overall professional reputation. The impacts of covid-19 on student success is a concern in higher education. Thus, it is important that this vital issue be addressed with unique strategies and innovative plans that are based on research that is data driven.
 
 ## Analysis plan
 
 -   A plan for answering each of the questions including the variables involved, variables to be created (if any), external data to be merged in (if any).
+
+**Week 1 Nov 1st - Nov 7th**
+
+-   Finalize proposal - group
+
+-   Clean and explore data - group
+
+-   Assign roles and responsibilities
+
+**Week 2 Nov 8th - Nov 14th**
+
+-   Exploratory data analysis
+
+-   Continue data preprocessing.
+
+-   Conduct exploratory data analysis (EDA) to identify initial trends and patterns.
+
+**Week 3 Nov 15th - Nov 21st**
+
+-   Anomaly and time series analysis 
+
+**Week 4 Nov 22nd - Nov 28th**
+
+-   Decision Tree Analysis
+
+**Week 5 Nov 29th - Dec 5th**
+
+-   (Ambitious goal :))Predictive modeling if time permits
+
+**Week 6 Dec 6th - 12th**
+
+-   Finalize the project and prepare for the presentation
