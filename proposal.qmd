@@ -13,17 +13,12 @@ library(tidyverse)
 
 ## Dataset
 
-```{r}
-#| label: load-dataset
-#| message: false
-```
-
 DEW Counts Data Set
 
 The DEW counts data set contains information about the breakdown of grade value outcomes during the academic years of 18-19, 19-20, and 20-21. The consists of 35697 observations with 23 variables per observation. Below is a description of the data:
 
 | Column Name                  | Column Description                                                                         |
-|------------------------------|--------------------------------------------------------------------------------------------|
+|-------------------|-----------------------------------------------------|
 | College                      | Identifies the college at the University of Arizona                                        |
 | Department                   | Identifies which department within given college                                           |
 | Subject.Code                 | Identifies the subject of the course                                                       |
@@ -49,6 +44,8 @@ The DEW counts data set contains information about the breakdown of grade value 
 | Per.Ungraded..Incomplete     | The percentage of enrolled students that did not receive a grade value in the course       |
 
 ```{r}
+#| label: load-dataset
+#| message: false
 # set working directory
 setwd("~/R/project-final-The-Null-Wranglers")
 # read in data
@@ -64,7 +61,7 @@ dew_counts
 
 #### **Why these questions?**
 
-Low student success rates have a profound impact on an educational institution's academic offerings, their ability to provide financial support and scholarships, as well as their overall professional reputation. The impacts of covid-19 on student success is a concern in higher education. Thus, it is important that this vital issue be addressed with unique strategies and innovative plans that are based on research that is data driven.
+Low student success rates have a profound impact on an educational institution's academic offerings, their ability to provide financial support and scholarships, as well as their overall professional reputation. The impacts of covid-19 on student success is a concern in higher education. Thus, it is important that this vital issue be addressed with unique strategies and innovative plans that are based on research that is data driven. By examining the grade value outcomes for the years before, during and after the pandemic, patterns and trends may be discovered that might help guide student support services. The analysis will breakdown the grade values outcomes by college, department, division level and course level using clustering and classification techniques. Anomalies will be isolated for a more fine grained inspection that includes course attributes. These attributes will be used in an effort to create a predictive model for future use.
 
 ## Analysis plan
 
