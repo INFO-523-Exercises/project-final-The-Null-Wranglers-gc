@@ -10,15 +10,13 @@ library(lubridate)
 
 ```
 
-
 ## Dataset Setup
 ```{r}
 # set working directory
-setwd("~/R/project-final-The-Null-Wranglers")
+setwd("C:/project-final-The-Null-Wranglers") # To be changed 
 # read in data
 dew_data <- read.csv("data/DEW Rates.csv")
 summary(dew_data)
-
 ```
 Data Cleaning
 ```{r}
@@ -49,6 +47,7 @@ dew_data <- dew_data %>%
 dew_data <- dew_data %>% 
   filter(Course.Level != "Graduate")
 ```
+
 ```{r}
 # remove summer courses
 dew_data <- dew_data %>% filter(TERM_LD != "Summer 2021", TERM_LD != "Summer 2020", TERM_LD != "Summer 2019")
@@ -98,7 +97,7 @@ dew_data %>%
               fill = Course.Level))+
   geom_bar(position = "dodge")
 ```
-We need to explain why there is so many more upper division courses
+We need to explain why there is so many more upper division courses, and how are lower & upper division courses are defined
 
 ```{r}
 #1 plot of enrollment grouped by division for each semester - Rohit
@@ -126,7 +125,77 @@ We need to explain why there is so many more upper division courses
 ```
 
 ```{r}
-#6 facet wrap of departments in top enrollemnt college of upper and lower per semester <- Dong
+#6 facet wrap of departments in top enrollment college of upper and lower per semester <- Dong
 
+library(readr)
+library(dplyr)
+
+# Filter THE top 1 enrollment college
+top_college <- dew_data %>%
+  group_by(College) %>%
+  summarise(total_enrollment = sum(Total.Student.Count)) %>%
+  top_n(1) %>%
+  pull(College)
+
+# Filter data to include only the top college, the College of Science
+top_college_data <- dew_data %>%
+  filter(College %in% top_college)
+
+#Create Facet Wrap 
+ggplot(top_college_data, aes(x = TERM_LD, y = Total.Student.Count, fill = Course.Level)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  facet_wrap(~ Department) +
+  theme_minimal() +
+  labs(title = "Enrollment by Department", 
+       x = "Semester", 
+       y = "Enrollment Numbers") +
+  scale_fill_brewer(palette = "Set1")+ theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+
+# The previous plot is hard to read due to too many departments' info displayed, thus I selected the 3 departments with top and least enrollment and tried again
+# The top 3 group
+high_enrollment_departments <- dew_data %>%
+  group_by(Department) %>%
+  summarize(avg_enrollment = mean(Total.Student.Count), .groups = "drop") %>%
+  arrange(desc(avg_enrollment)) %>%
+  slice_max(order_by = avg_enrollment, n = 3) %>%
+  pull(Department)
+
+# The bottom 3 group
+low_enrollment_departments <- dew_data %>%
+  group_by(Department) %>%
+  summarize(avg_enrollment = mean(Total.Student.Count), .groups = "drop") %>%
+  arrange(avg_enrollment) %>%
+  slice_min(order_by = avg_enrollment, n = 3) %>%
+  pull(Department)
+
+# Plot for departments with higher enrollments
+high_enrollment_plot <- ggplot(dew_data %>% filter(Department %in% high_enrollment_departments), 
+                               aes(x = TERM_LD, y = Total.Student.Count, fill = Course.Level)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  facet_wrap(~ Department, scales = "free_y") +
+  theme_minimal() +
+  labs(title = "Top 3 Departments for Enrollment (College of Science)", 
+       x = "Semester", 
+       y = "Enrollment Numbers") +
+  scale_fill_brewer(palette = "Set1") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+
+# Print or save the high_enrollment_plot
+print(high_enrollment_plot)
+
+# Plot for departments with lower enrollments
+low_enrollment_plot <- ggplot(dew_data %>% filter(Department %in% low_enrollment_departments), 
+                               aes(x = TERM_LD, y = Total.Student.Count, fill = Course.Level)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  facet_wrap(~ Department, scales = "free_y") +
+  theme_minimal() +
+  labs(title = "Bottom 3 Departments for Enrollment (College of Science)", 
+       x = "Semester", 
+       y = "Enrollment Numbers") +
+  scale_fill_brewer(palette = "Set1") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+
+# Print or save the high_enrollment_plot
+print(low_enrollment_plot)
 ```
 
