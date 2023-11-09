@@ -1,4 +1,7 @@
-
+---
+format: html
+editor: visual
+---
 
 ```{r}
 #| label: load-pkgs
@@ -7,20 +10,22 @@
 suppressWarnings(library(tidyverse))
 library(knitr)
 library(lubridate)
-
+library(ggplot2)
 ```
 
-
 ## Dataset Setup
+
 ```{r}
 # set working directory
-setwd("~/R/project-final-The-Null-Wranglers")
+# setwd("C:/Users/Utkarsha/OneDrive/Desktop/Data Mining/Project/project-final-The-Null-Wranglers")
 # read in data
 dew_data <- read.csv("data/DEW Rates.csv")
 summary(dew_data)
 
 ```
+
 Data Cleaning
+
 ```{r}
 # the total student count is currently a char - convert to an int
 # remove commas then convert
@@ -49,6 +54,7 @@ dew_data <- dew_data %>%
 dew_data <- dew_data %>% 
   filter(Course.Level != "Graduate")
 ```
+
 ```{r}
 # remove summer courses
 dew_data <- dew_data %>% filter(TERM_LD != "Summer 2021", TERM_LD != "Summer 2020", TERM_LD != "Summer 2019")
@@ -73,14 +79,15 @@ dew_data <- dew_data %>% filter(Course.Description != "Internship",
 
 ```
 
-
 ```{r}
 # inspect data
 summary(dew_data)
 ```
-Should we remove some of these columns? 
+
+Should we remove some of these columns?
 
 ## Plots
+
 ```{r}
 # total number of courses per semester?
 dew_data %>% 
@@ -98,18 +105,17 @@ dew_data %>%
               fill = Course.Level))+
   geom_bar(position = "dodge")
 ```
+
 We need to explain why there is so many more upper division courses
 
 ```{r}
 #1 plot of enrollment grouped by division for each semester - Rohit
 ```
 
-
 ```{r}
 #2 mean and median of each semester - Rohit
 
 ```
-
 
 ```{r}
 #3 mean enrollment for course level by semester - Anjani
@@ -120,8 +126,39 @@ We need to explain why there is so many more upper division courses
 #4 facet wrap of colleges of upper and lower per semester - Kristi
 ```
 
-```{r}
+```{r fig.height= 25, fig.width= 12}
 #5 facet wrap of colleges of mean enrollment per semester <- Utkarsha
+
+# Assuming your data frame is named DEW_Rates
+# Convert TERM_LD to a factor in the desired order
+dew_data$TERM_LD <- factor(dew_data$TERM_LD, levels = c(
+  "Fall 2018", "Fall 2019", "Fall 2020",
+  "Spring 2019", "Spring 2020", "Spring 2021"
+))
+
+# Create a ggplot object
+p <- ggplot(data = dew_data, aes(x = TERM_LD, y = Total.Student.Count, fill = College))
+
+# Create a bar plot
+p <- p + geom_bar(stat = "summary", fun = "mean", position = "dodge")
+
+# Customize the plot
+p <- p + labs(title = "Mean Enrollment per Semester by College",
+              x = "Semester",
+              y = "Mean Enrollment",
+              fill = "College")
+
+# Facet by College
+p <- p + facet_wrap(~ College, scales = "free", ncol = 2)
+
+# Rotate x-axis labels for better readability
+p <- p + theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+# Adjust x-axis text size and angle for readability
+p <- p + theme(axis.text.x = element_text(size = 10, angle = 45, hjust = 1))
+
+# Show the plot
+print(p)
 
 ```
 
@@ -129,4 +166,3 @@ We need to explain why there is so many more upper division courses
 #6 facet wrap of departments in top enrollemnt college of upper and lower per semester <- Dong
 
 ```
-
