@@ -14,7 +14,8 @@ library(lubridate)
 ## Dataset Setup
 ```{r}
 # set working directory
-setwd("~/R/project-final-The-Null-Wranglers")
+# setwd("~/R/project-final-The-Null-Wranglers")
+
 # read in data
 dew_data <- read.csv("data/DEW Rates.csv")
 summary(dew_data)
