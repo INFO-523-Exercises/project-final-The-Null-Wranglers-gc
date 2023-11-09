@@ -116,8 +116,20 @@ We need to explain why there is so many more upper division courses
 
 ```
 
-```{r}
-#4 facet wrap of colleges of upper and lower per semester - Kristi
+```{r fig.height=16, fig.width=12}
+#4 facet wrap of colleges of upper and lower per semester by enrollment - Kristi
+# courses by sections - some classes are offered more than once per semester could help explain the above results in course level
+dew_data %>% 
+  group_by(TERM_LD, Course.Level, College) %>% 
+  summarise(total_enrolled = sum(Total.Student.Count)) %>% 
+  ggplot(aes( x = TERM_LD,
+              y = total_enrolled,
+              fill = Course.Level))+
+  geom_col(position = "dodge")+
+  facet_wrap(~College, ncol=2)+
+  labs(title = "Comparisons of Student Enrollment",
+                                    x = "Semester",
+                                    y = "Total Enrollment")
 ```
 
 ```{r}
