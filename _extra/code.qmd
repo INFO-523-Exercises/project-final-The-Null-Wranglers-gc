@@ -17,14 +17,10 @@ library(ggplot2)
 <<<<<<< HEAD
 
 ```{r}
+
 # set working directory
-setwd("C:/project-final-The-Null-Wranglers") # To be changed 
->>>>>>> 7e45ef850f1ab3d0b803aaa0fd244c7460ff35a0
-=======
-```{r, warning=FALSE}
-# set working directory
-setwd("D:/Data scienc Class Fall 2023/Data Mining in R class/Final Project/project-final-The-Null-Wranglers")
->>>>>>> 44ae21815e6d6370a06a981802428fa5b712eaee
+setwd("C:/Users/krist/OneDrive/Documents/R/project-final-The-Null-Wranglers")
+
 # read in data
 dew_data <- read.csv("data/DEW Rates.csv")
 summary(dew_data)
