@@ -19,10 +19,14 @@ The DEW counts data set contains information about the breakdown of grade value 
 
 | Column Name                  | Column Description                                                                         |
 <<<<<<< HEAD
+|-------------------|-----------------------------------------------------|
+=======
+<<<<<<< HEAD
 |------------------------------|--------------------------------------------------------------------------------------------|
 =======
 |--------------------|----------------------------------------------------|
 >>>>>>> 7e45ef850f1ab3d0b803aaa0fd244c7460ff35a0
+>>>>>>> 44ae21815e6d6370a06a981802428fa5b712eaee
 | College                      | Identifies the college at the University of Arizona                                        |
 | Department                   | Identifies which department within given college                                           |
 | Subject.Code                 | Identifies the subject of the course                                                       |
@@ -51,7 +55,7 @@ The DEW counts data set contains information about the breakdown of grade value 
 #| label: load-dataset
 #| message: false
 # set working directory
-#setwd("~/R/project-final-The-Null-Wranglers")
+setwd("~/R/project-final-The-Null-Wranglers")
 # read in data
 dew_counts <- read.csv("data/DEW Rates.csv")
 dew_counts
