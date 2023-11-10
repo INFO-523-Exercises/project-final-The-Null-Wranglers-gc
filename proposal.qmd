@@ -18,7 +18,15 @@ DEW Counts Data Set
 The DEW counts data set contains information about the breakdown of grade value outcomes during the academic years of 18-19, 19-20, and 20-21. The consists of 35697 observations with 23 variables per observation. Below is a description of the data:
 
 | Column Name                  | Column Description                                                                         |
+<<<<<<< HEAD
 |-------------------|-----------------------------------------------------|
+=======
+<<<<<<< HEAD
+|------------------------------|--------------------------------------------------------------------------------------------|
+=======
+|--------------------|----------------------------------------------------|
+>>>>>>> 7e45ef850f1ab3d0b803aaa0fd244c7460ff35a0
+>>>>>>> 44ae21815e6d6370a06a981802428fa5b712eaee
 | College                      | Identifies the college at the University of Arizona                                        |
 | Department                   | Identifies which department within given college                                           |
 | Subject.Code                 | Identifies the subject of the course                                                       |

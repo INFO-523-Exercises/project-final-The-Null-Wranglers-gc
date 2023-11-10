@@ -14,11 +14,17 @@ library(ggplot2)
 ```
 
 ## Dataset Setup
+<<<<<<< HEAD
 
 ```{r}
 # set working directory
 setwd("C:/project-final-The-Null-Wranglers") # To be changed 
 >>>>>>> 7e45ef850f1ab3d0b803aaa0fd244c7460ff35a0
+=======
+```{r, warning=FALSE}
+# set working directory
+setwd("D:/Data scienc Class Fall 2023/Data Mining in R class/Final Project/project-final-The-Null-Wranglers")
+>>>>>>> 44ae21815e6d6370a06a981802428fa5b712eaee
 # read in data
 dew_data <- read.csv("data/DEW Rates.csv")
 summary(dew_data)
@@ -126,8 +132,20 @@ We need to explain why there is so many more upper division courses, and how are
 
 ```
 
-```{r}
-#4 facet wrap of colleges of upper and lower per semester - Kristi
+```{r fig.height=16, fig.width=12}
+#4 facet wrap of colleges of upper and lower per semester by enrollment - Kristi
+# courses by sections - some classes are offered more than once per semester could help explain the above results in course level
+dew_data %>% 
+  group_by(TERM_LD, Course.Level, College) %>% 
+  summarise(total_enrolled = sum(Total.Student.Count)) %>% 
+  ggplot(aes( x = TERM_LD,
+              y = total_enrolled,
+              fill = Course.Level))+
+  geom_col(position = "dodge")+
+  facet_wrap(~College, ncol=2)+
+  labs(title = "Comparisons of Student Enrollment",
+                                    x = "Semester",
+                                    y = "Total Enrollment")
 ```
 
 ```{r fig.height= 25, fig.width= 12}
