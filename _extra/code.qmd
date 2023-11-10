@@ -11,14 +11,9 @@ library(lubridate)
 ```
 
 ## Dataset Setup
-```{r}
+```{r, warning=FALSE}
 # set working directory
-<<<<<<< HEAD
-# setwd("~/R/project-final-The-Null-Wranglers")
-
-=======
-setwd("C:/project-final-The-Null-Wranglers") # To be changed 
->>>>>>> 7e45ef850f1ab3d0b803aaa0fd244c7460ff35a0
+setwd("D:/Data scienc Class Fall 2023/Data Mining in R class/Final Project/project-final-The-Null-Wranglers")
 # read in data
 dew_data <- read.csv("data/DEW Rates.csv")
 summary(dew_data)
