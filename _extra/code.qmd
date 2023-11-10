@@ -112,6 +112,19 @@ We need to explain why there is so many more upper division courses, and how are
 
 ```{r}
 #3 mean enrollment for course level by semester - Anjani
+library(dplyr)
+library(ggplot2)
+
+dew_data %>%
+  mutate(Total.Student.Count = as.numeric(Total.Student.Count)) %>%
+  mutate(Total.Student.Count = ifelse(is.na(Total.Student.Count), 0, Total.Student.Count)) %>%
+  group_by(TERM_LD, Course.Level) %>%
+  summarise(mean_enrollment = mean(Total.Student.Count, na.rm = TRUE)) %>%
+  ggplot(aes(x = TERM_LD, y = mean_enrollment, fill = Course.Level)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(title = "Mean Enrollment for Course Level by Semester",
+       x = "Semester",
+       y = "Mean Enrollment")
 
 ```
 
