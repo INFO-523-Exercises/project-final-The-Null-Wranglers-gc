@@ -76,7 +76,7 @@ kable(head(dew_counts))
 The second data set used for this analysis, is known as the SY20 and SY21, contains information about course attributes for the academic years of 2019-20, and 2020-21 at the University of Arizona. Unfortunately the academic year of 2018-19 was unable to obtained for this study. There are over 260,000 observations of courses with 27 variable per observation.
 
 | Variable          | Description                                                       |
-|----------------------|--------------------------------------------------|
+|-----------------------|-------------------------------------------------|
 | Term              | The term the course was offered                                   |
 | Campus            | The campus the course was offered at                              |
 | Session           | The type of session for the course - regular, first 7 weeks, etc, |
@@ -116,6 +116,66 @@ kable(head(sy20_data))
 ```
 
 ## Analysis plan
+
+***Data Collection***
+
+-    Historical Grade Data: Collect historical grade data from the University of Arizona for the years before, during, and after the COVID-19 pandemic. This data should include information on grade value outcomes for courses by semester.
+
+-   Course Attributes Data: Gather data on course attributes such as class size, instructional format (online, hybrid, in-person), faculty information, time and day of the class offering, and any other relevant features that might influence grade outcomes.
+
+***Exploratory Data Analysis (EDA)***
+
+2.1 Descriptive Statistics
+
+Calculate summary statistics for overall grade distributions, college-wise, department-wise, and course-level. Examine mean, median, standard deviation, and any potential outliers.
+
+***Pattern Analysis***
+
+3.1 Clustering
+
+Utilize clustering techniques to group colleges, departments, and courses based on similar grade outcomes. Evaluate if specific clusters show distinct patterns during the pandemic.
+
+3.2 Classification
+
+Apply classification algorithms to identify factors influencing grade outcomes. Investigate if colleges, departments, or specific course attributes significantly contribute to predicting grade results.
+
+3.3 Anomaly Detection
+
+Identify anomalies in grade distributions, focusing on courses or departments that experienced unexpected changes during the pandemic. Conduct a fine-grained inspection of these anomalies.
+
+3.4 Time Series Decomposition
+
+Decompose the time series data to identify trends, seasonality, and residual components. Analyze if any irregularities in the residual component coincide with the pandemic period.
+
+3.5 Decision Tree Analysis
+
+Employ decision tree analysis to understand the hierarchy of factors influencing grade outcomes.
+
+***Predictive Modeling***
+
+4.1 Feature Selection
+
+Select relevant course attributes for predictive modeling. Use domain knowledge and statistical methods to choose features that significantly impact grade outcomes.
+
+4.2 Model Development
+
+Build predictive models using machine learning algorithms such as regression or classification. Split the data into training and testing sets to evaluate model performance.
+
+4.3 Model Evaluation
+
+Assess the accuracy, precision, recall, and F1-score of the developed models. Compare models' performance across different colleges, departments, and course levels.
+
+4.4 Interpretation
+
+Interpret the results of the predictive models to understand the key factors influencing grade outcomes. Provide insights into how colleges, departments, and course attributes contribute to student success.
+
+***Reporting***
+
+5.1 Prepare a comprehensive report summarizing the methodology, findings, recommendations and potential future research. This report will include visualizations such as charts and graphs to enhance the presentation of results. Clearly communicate the findings of the study in an effort to student support services and academic planning at the University of Arizona.
+
+5.2 Future Research
+
+Highlight areas for future research based on gaps identified during the analysis. This could involve further investigation into specific anomalies or exploring the long-term effects of the pandemic on student success.
 
 -   A plan for answering each of the questions including the variables involved, variables to be created (if any), external data to be merged in (if any).
 
