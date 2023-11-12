@@ -1,75 +1,119 @@
 ---
-title: "Descriptive analysis of grade outcomes"
-subtitle: "Proposal"
+title: "Descriptive Analysis of Grade Outcomes"
+subtitle: "Proposal Final Project"
+author: "The Null Wranglers Team"
 format: html
 editor: visual
 ---
 
-```{r}
-#| label: load-pkgs
-#| message: false
-library(tidyverse)
+```{r load_pkgs, message=FALSE, output=FALSE}
+#| code-fold: true
+#| code-summary: "Installed Packages"
+# Load Libraries
+library(knitr)
+if (!require(pacman))
+  install.packages(pacman)
+
+pacman::p_load(tidyverse,   # Data wrangling
+               dlookr,      # Exploratory Data Analysis
+               formattable, # Present neat table format
+               gt,          # Alternating formatting for the tables
+               gtsummary)   # Summary for the tables
 ```
+
+## Introduction
+
+Low student success rates have a profound impact on an educational institution's academic offerings, their ability to provide financial support and scholarships, as well as their overall professional reputation. Much is unknown about how the corona-virus pandemic has impacted student success in higher education. Thus, in order to better understand this impact, this study seeks to conduct a detailed examination of the grade value outcomes during this time. By examining the grade value outcomes for the years before, during and after the pandemic, patterns and trends may be discovered that might help guide student support services in the future. The analysis will breakdown the grade values outcomes by college, department, division level and course level using clustering and classification techniques. Anomalies will be isolated for a more fine grained inspection that includes course attributes. These course attributes will be used in an effort to create a model for predictive grade value outcomes.
+
+## Goals
+
+The high-level goal of this study is to analyze and understand the grade outcomes at the University of Arizona (UofA) pre-, during, and after the COVID-19 pandemic. This investigation revolves around two primary questions:
+
+1.  Pattern Analysis -- What if any patterns or relationships exist between colleges, departments, or course level and grade outcomes for enrolled students?
+
+2.  Predictive Modeling -- Can a predictive model be developed that accurately forecasts grade outcomes based on course attributes?
 
 ## Dataset
 
-DEW Counts Data Set
+The first data set used for this analysis, is known as the DEW Rates, contains information about the breakdown of grade value outcomes during the academic years of 2018-19, 2019-20, and 2020-21 at the University of Arizona. The consists of 35697 observations of courses with 23 variables related to enrollment and grade values. Below is a description of the data:
 
-The DEW counts data set contains information about the breakdown of grade value outcomes during the academic years of 18-19, 19-20, and 20-21. The consists of 35697 observations with 23 variables per observation. Below is a description of the data:
+| Variable                     | Description                                                                                                                                                          |
+|------------------------------|------------------------------------------|
+| College                      | Identifies the college at the University of Arizona                                                                                                                  |
+| Department                   | Identifies which department within given college                                                                                                                     |
+| Subject.Code                 | Identifies the subject of the course with a 3 or 4 letter code                                                                                                       |
+| Catalog.Number               | Identifies the catalog number of the course                                                                                                                          |
+| Course.Description           | Identifies the title or the course                                                                                                                                   |
+| Course.Level                 | Identifies if the course is lower, upper or graduate division                                                                                                        |
+| Total.Student.Count          | The total enrollment for the course                                                                                                                                  |
+| D_GRADE_COUNT                | The number of enrolled students that earned a D grade in the course                                                                                                  |
+| FAIL_GRADE_COUNT             | The number of enrolled students that earned a E(Fail) grade in the course                                                                                            |
+| WITHDRAW_GRADE_COUNT         | The number of enrolled students that withdrew from the course                                                                                                        |
+| DEW_COUNT                    | The total of D, E, and W grades earned by enrolled students in the course                                                                                            |
+| PASS_GRADE_COUNT             | The number of enrolled students that received a C or greater grade value                                                                                             |
+| WITHDRAW_FULLMED_GRADE_COUNT | The number of enrolled students that took a full medical withdrawal                                                                                                  |
+| INCOMPLETE_UNGRADED_COUNT    | The number of enrolled students that did not receive grades                                                                                                          |
+| TERM_LD                      | The semester that the course was offered                                                                                                                             |
+| ACAD_YR_SID                  | The academic year that the course was offered                                                                                                                        |
+| Percent.D.Grade              | The percentage of enrolled students that received a D grade in the course                                                                                            |
+| Percent.E.Grade              | The percentage of enrolled students that received a E grade in the course                                                                                            |
+| Percent.W.Grade              | The percentage of enrolled students that received a W grade in the course                                                                                            |
+| Percent.DEW                  | The percentage of enrolled students that received a D, E, or W grade in the courseThe percentage of enrolled students that received a D, E, or W grade in the course |
+| Percent.Passed               | The percentage of enrolled students that received a C or greater grade value in the course                                                                           |
+| Per.Full..Medical.Withdrawal | The percentage of enrolled students that had a full medical withdraw in the course                                                                                   |
+| Per.Ungraded..Incomplete     | The percentage of enrolled students that did not receive a grade value in the course                                                                                 |
 
-| Column Name                  | Column Description                                                                         |
-<<<<<<< HEAD
-|-------------------|-----------------------------------------------------|
-=======
-<<<<<<< HEAD
-|------------------------------|--------------------------------------------------------------------------------------------|
-=======
-|--------------------|----------------------------------------------------|
->>>>>>> 7e45ef850f1ab3d0b803aaa0fd244c7460ff35a0
->>>>>>> 44ae21815e6d6370a06a981802428fa5b712eaee
-| College                      | Identifies the college at the University of Arizona                                        |
-| Department                   | Identifies which department within given college                                           |
-| Subject.Code                 | Identifies the subject of the course                                                       |
-| Catalog.Number               | Identifies the catalog number of the course                                                |
-| Course.Description           | Provides the title of the course                                                           |
-| Course.Level                 | Identifies if the course is lower, upper or graduate division                              |
-| Total.Student.Count          | The total enrollment for the course                                                        |
-| D_GRADE_COUNT                | The number of enrolled students that earned a D grade in the course                        |
-| FAIL_GRADE_COUNT             | The number of enrolled students that earned a E(Fail) grade in the course                  |
-| WITHDRAW_GRADE_COUNT         | The number of enrolled students that withdrew from the course                              |
-| DEW_COUNT                    | The total of D, E, and W grades earned by enrolled students in the course                  |
-| PASS_GRADE_COUNT             | The number of enrolled students that received a C or greater grade value                   |
-| WITHDRAW_FULLMED_GRADE_COUNT | The number of enrolled students that took a full medical withdrawal                        |
-| INCOMPLETE_UNGRADED_COUNT    | The number of enrolled students that did not receive grades                                |
-| TERM_LD                      | The semester that the course was offered                                                   |
-| ACAD_YR_SID                  | The academic year that the course was offered                                              |
-| Percent.D.Grade              | The percentage of enrolled students that received a D grade in the course                  |
-| Percent.E.Grade              | The percentage of enrolled students that received a E grade in the course                  |
-| Percent.W.Grade              | The percentage of enrolled students that received a W grade in the course                  |
-| Percent.DEW                  | The percentage of enrolled students that received a D, E, or W grade in the course         |
-| Percent.Passed               | The percentage of enrolled students that received a C or greater grade value in the course |
-| Per.Full..Medical.Withdrawal | The percentage of enrolled students that had a full medical withdraw in the course         |
-| Per.Ungraded..Incomplete     | The percentage of enrolled students that did not receive a grade value in the course       |
+: Grade Outcomes Data
 
-```{r}
+```{r  message=FALSE}
 #| label: load-dataset
-#| message: false
-# set working directory
-setwd("~/R/project-final-The-Null-Wranglers")
 # read in data
 dew_counts <- read.csv("data/DEW Rates.csv")
-dew_counts
+
+kable(head(dew_counts))
 ```
 
-## Questions
+The second data set used for this analysis, is known as the SY20 and SY21, contains information about course attributes for the academic years of 2019-20, and 2020-21 at the University of Arizona. Unfortunately the academic year of 2018-19 was unable to obtained for this study. There are over 260,000 observations of courses with 27 variable per observation.
 
-1.  What if any patterns or relationships exist between colleges, departments, or course level and grade outcomes for enrolled students?
+| Variable          | Description                                                       |
+|----------------------|--------------------------------------------------|
+| Term              | The term the course was offered                                   |
+| Campus            | The campus the course was offered at                              |
+| Session           | The type of session for the course - regular, first 7 weeks, etc, |
+| Subject           | The 3 or 4 letter subject code of the course                      |
+| Cat . .           | The course catalog code                                           |
+| Section           | The section number of the course                                  |
+| Class . .         | The class identifier code                                         |
+| Start.Date        | The start date of the course                                      |
+| End.Date          | The end of the course                                             |
+| Meet . .          | The number of meetings for each course                            |
+| Req.Desig         | A course type identifier                                          |
+| P.F. Opt          | A flag that indicates if the course was a P or F option           |
+| Component         | Category/Type of course                                           |
+| Units             | The number of units of the course                                 |
+| Min.Units         | The minimum number of units allowed for the course                |
+| Max.Units         | The maximum number of units allowed for the course                |
+| Course            | The name of the course                                            |
+| Combined.Section  | Identifier if the course is combined with another course          |
+| Meeting.Days      | The list of days the courses meets on                             |
+| Start             | The start time of day that the course meets                       |
+| End               | The end time of day that the course meets                         |
+| Facility          | The location or room of the course meetings                       |
+| Total.Enroll      | The total number of students enrolled                             |
+| Max.Enroll        | The maximum number of students allowed to enrolled                |
+| Rm.Cap            | The maximum number of students allowed in the meeting space       |
+| Enrollment.Status | Identifier if the course was an open or closed enrollment         |
+| Mode              | The modelity of the course                                        |
 
-2.  Can a predictive model be developed that accurately forecasts grade outcomes based on course attributes?
+: Course Schedule Overview
 
-#### **Why these questions?**
+```{r message=FALSE}
+#| label: load-dataset1
+# read in two csv files
+sy20_data <- read.csv("data/Course Schedule Overview - SY20.csv")
 
-Low student success rates have a profound impact on an educational institution's academic offerings, their ability to provide financial support and scholarships, as well as their overall professional reputation. The impacts of covid-19 on student success is a concern in higher education. Thus, it is important that this vital issue be addressed with unique strategies and innovative plans that are based on research that is data driven. By examining the grade value outcomes for the years before, during and after the pandemic, patterns and trends may be discovered that might help guide student support services. The analysis will breakdown the grade values outcomes by college, department, division level and course level using clustering and classification techniques. Anomalies will be isolated for a more fine grained inspection that includes course attributes. These attributes will be used in an effort to create a predictive model for future use.
+kable(head(sy20_data))
+```
 
 ## Analysis plan
 
