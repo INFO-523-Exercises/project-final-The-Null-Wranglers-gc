@@ -1,0 +1,135 @@
+[
+  {
+    "objectID": "proposal.html",
+    "href": "proposal.html",
+    "title": "Descriptive Analysis of Grade Outcomes",
+    "section": "",
+    "text": "Installed Packages\n# Load Libraries\nlibrary(knitr)\nif (!require(pacman))\n  install.packages(pacman)\n\npacman::p_load(tidyverse,   # Data wrangling\n               dlookr,      # Exploratory Data Analysis\n               formattable, # Present neat table format\n               gt,          # Alternating formatting for the tables\n               gtsummary)   # Summary for the tables"
+  },
+  {
+    "objectID": "proposal.html#introduction",
+    "href": "proposal.html#introduction",
+    "title": "Descriptive Analysis of Grade Outcomes",
+    "section": "Introduction",
+    "text": "Introduction\nLow student success rates have a profound impact on an educational institution’s academic offerings, their ability to provide financial support and scholarships, as well as their overall professional reputation. Much is unknown about how the corona-virus pandemic has impacted student success in higher education. Thus, in order to better understand this impact, this study seeks to conduct a detailed examination of the grade value outcomes during this time. By examining the grade value outcomes for the years before, during and after the pandemic, patterns and trends may be discovered that might help guide student support services in the future. The analysis will breakdown the grade values outcomes by college, department, division level and course level using clustering and classification techniques. Anomalies will be isolated for a more fine grained inspection that includes course attributes. These course attributes will be used in an effort to create a model for predictive grade value outcomes."
+  },
+  {
+    "objectID": "proposal.html#goals",
+    "href": "proposal.html#goals",
+    "title": "Descriptive Analysis of Grade Outcomes",
+    "section": "Goals",
+    "text": "Goals\nThe high-level goal of this study is to analyze and understand the grade outcomes at the University of Arizona (UofA) pre-, during, and after the COVID-19 pandemic. This investigation revolves around two primary questions:\n\nPattern Analysis – What if any patterns or relationships exist between colleges, departments, or course level and grade outcomes for enrolled students?\nPredictive Modeling – Can a predictive model be developed that accurately forecasts grade outcomes based on course attributes?"
+  },
+  {
+    "objectID": "proposal.html#dataset",
+    "href": "proposal.html#dataset",
+    "title": "Descriptive Analysis of Grade Outcomes",
+    "section": "Dataset",
+    "text": "Dataset\nThe first data set used for this analysis, is known as the DEW Rates, contains information about the breakdown of grade value outcomes during the academic years of 2018-19, 2019-20, and 2020-21 at the University of Arizona. The consists of 35697 observations of courses with 23 variables related to enrollment and grade values. Below is a description of the data:\n\nGrade Outcomes Data\n\n\n\n\n\n\nVariable\nDescription\n\n\n\n\nCollege\nIdentifies the college at the University of Arizona\n\n\nDepartment\nIdentifies which department within given college\n\n\nSubject.Code\nIdentifies the subject of the course with a 3 or 4 letter code\n\n\nCatalog.Number\nIdentifies the catalog number of the course\n\n\nCourse.Description\nIdentifies the title or the course\n\n\nCourse.Level\nIdentifies if the course is lower, upper or graduate division\n\n\nTotal.Student.Count\nThe total enrollment for the course\n\n\nD_GRADE_COUNT\nThe number of enrolled students that earned a D grade in the course\n\n\nFAIL_GRADE_COUNT\nThe number of enrolled students that earned a E(Fail) grade in the course\n\n\nWITHDRAW_GRADE_COUNT\nThe number of enrolled students that withdrew from the course\n\n\nDEW_COUNT\nThe total of D, E, and W grades earned by enrolled students in the course\n\n\nPASS_GRADE_COUNT\nThe number of enrolled students that received a C or greater grade value\n\n\nWITHDRAW_FULLMED_GRADE_COUNT\nThe number of enrolled students that took a full medical withdrawal\n\n\nINCOMPLETE_UNGRADED_COUNT\nThe number of enrolled students that did not receive grades\n\n\nTERM_LD\nThe semester that the course was offered\n\n\nACAD_YR_SID\nThe academic year that the course was offered\n\n\nPercent.D.Grade\nThe percentage of enrolled students that received a D grade in the course\n\n\nPercent.E.Grade\nThe percentage of enrolled students that received a E grade in the course\n\n\nPercent.W.Grade\nThe percentage of enrolled students that received a W grade in the course\n\n\nPercent.DEW\nThe percentage of enrolled students that received a D, E, or W grade in the courseThe percentage of enrolled students that received a D, E, or W grade in the course\n\n\nPercent.Passed\nThe percentage of enrolled students that received a C or greater grade value in the course\n\n\nPer.Full..Medical.Withdrawal\nThe percentage of enrolled students that had a full medical withdraw in the course\n\n\nPer.Ungraded..Incomplete\nThe percentage of enrolled students that did not receive a grade value in the course\n\n\n\n\n\nLoad Data 1\n# read in data\ndew_counts &lt;- read.csv(\"data/DEW Rates.csv\")\n\nkable(head(dew_counts))\n\n\n\n\n\nCollege\nDepartment\nSubject.Code\nCatalog.Number\nCourse.Description\nCourse.Level\nTotal.Student.Count\nD_GRADE_COUNT\nFAIL_GRADE_COUNT\nWITHDRAW_GRADE_COUNT\nDEW_COUNT\nPASS_GRADE_COUNT\nWITHDRAW_FULLMED_GRADE_COUNT\nINCOMPLETE_UNGRADED_COUNT\nTERM_LD\nACAD_YR_SID\nPercent.D.Grade\nPercent.E.Grade\nPercent.W.Grade\nPercent.DEW\nPercent.Passed\nPer.Full..Medical.Withdrawal\nPer.Ungraded..Incomplete\n\n\n\n\nCollege of Engineering\nAerospace & Mechanical Engr\nABE\n489A\nFab Tech Micro+Nanodevic\nUpper Division\n10\n0\n0\n0\n0\n10\n0\n0\nFall 2018\n2019\n0.0\n0.0\n0.0\n0.0\n100.0\n0.0\n0\n\n\nCollege of Engineering\nAerospace & Mechanical Engr\nAME\n105\nIntroduction to MATLAB I\nLower Division\n196\n17\n2\n1\n20\n173\n3\n0\nFall 2018\n2019\n8.7\n1.0\n0.5\n10.2\n88.3\n1.5\n0\n\n\nCollege of Engineering\nAerospace & Mechanical Engr\nAME\n105\nIntroduction to MATLAB I\nLower Division\n160\n22\n17\n3\n42\n115\n3\n0\nFall 2019\n2020\n13.8\n10.6\n1.9\n26.3\n71.9\n1.9\n0\n\n\nCollege of Engineering\nAerospace & Mechanical Engr\nAME\n105\nIntroduction to MATLAB I\nLower Division\n111\n11\n4\n5\n20\n82\n9\n0\nFall 2020\n2021\n9.9\n3.6\n4.5\n18.0\n73.9\n8.1\n0\n\n\nCollege of Engineering\nAerospace & Mechanical Engr\nAME\n105\nIntroduction to MATLAB I\nLower Division\n254\n11\n5\n6\n22\n231\n1\n0\nSpring 2019\n2019\n4.3\n2.0\n2.4\n8.7\n90.9\n0.4\n0\n\n\nCollege of Engineering\nAerospace & Mechanical Engr\nAME\n105\nIntroduction to MATLAB I\nLower Division\n213\n3\n9\n19\n31\n182\n0\n0\nSpring 2020\n2020\n1.4\n4.2\n8.9\n14.6\n85.4\n0.0\n0\n\n\n\n\n\n\n\nThe second data set used for this analysis, is known as the SY20 and SY21, contains information about course attributes for the academic years of 2019-20, and 2020-21 at the University of Arizona. Unfortunately the academic year of 2018-19 was unable to obtained for this study. There are over 260,000 observations of courses with 27 variable per observation.\n\nCourse Schedule Overview\n\n\n\n\n\n\nVariable\nDescription\n\n\n\n\nTerm\nThe term the course was offered\n\n\nCampus\nThe campus the course was offered at\n\n\nSession\nThe type of session for the course - regular, first 7 weeks, etc,\n\n\nSubject\nThe 3 or 4 letter subject code of the course\n\n\nCat . .\nThe course catalog code\n\n\nSection\nThe section number of the course\n\n\nClass . .\nThe class identifier code\n\n\nStart.Date\nThe start date of the course\n\n\nEnd.Date\nThe end of the course\n\n\nMeet . .\nThe number of meetings for each course\n\n\nReq.Desig\nA course type identifier\n\n\nP.F. Opt\nA flag that indicates if the course was a P or F option\n\n\nComponent\nCategory/Type of course\n\n\nUnits\nThe number of units of the course\n\n\nMin.Units\nThe minimum number of units allowed for the course\n\n\nMax.Units\nThe maximum number of units allowed for the course\n\n\nCourse\nThe name of the course\n\n\nCombined.Section\nIdentifier if the course is combined with another course\n\n\nMeeting.Days\nThe list of days the courses meets on\n\n\nStart\nThe start time of day that the course meets\n\n\nEnd\nThe end time of day that the course meets\n\n\nFacility\nThe location or room of the course meetings\n\n\nTotal.Enroll\nThe total number of students enrolled\n\n\nMax.Enroll\nThe maximum number of students allowed to enrolled\n\n\nRm.Cap\nThe maximum number of students allowed in the meeting space\n\n\nEnrollment.Status\nIdentifier if the course was an open or closed enrollment\n\n\nMode\nThe modelity of the course\n\n\n\n\n\nLoad Data 2\n# read in two csv files\nsy20_data &lt;- read.csv(\"data/Course Schedule Overview - SY20.csv\")\n\nkable(head(sy20_data))\n\n\n\n\n\nTerm\nCampus\nSession\nSubject\nCat..\nSection\nClass..\nStart.Date\nEnd.Date\nMeet..\nReq.Desig\nP.F.Opt\nComponent\nUnits\nMin.Units\nMax.Units\nCourse\nCombined.Section\nMeeting.Days\nStart\nEnd\nFacility\nTotal.Enroll\nMax.Enroll\nRm.Cap\nEnrollment.Status\nMode\n\n\n\n\nFall 2019\nMAIN\nRegular Academic Session\nABS\n593A\n1\n45315\n8/26/2019\n12/11/2019\n1\n-\n\nInd Study\n1\n1\n9\nInternship in Applied Biosci\n-\n\n12:00 AM\n12:00 AM\nNA\n0\n0\n0\nClosed\nIn Person\n\n\nFall 2019\nMAIN\nRegular Academic Session\nABS\n593A\n2\n45394\n8/26/2019\n12/11/2019\n1\n-\n\nInd Study\n1\n1\n9\nInternship in Applied Biosci\n-\n\n12:00 AM\n12:00 AM\nNA\n1\n5\n0\nOpen\nIn Person\n\n\nFall 2019\nMAIN\nRegular Academic Session\nABS\n593A\n3\n45395\n8/26/2019\n12/11/2019\n1\n-\n\nInd Study\n1\n1\n9\nInternship in Applied Biosci\n-\n\n12:00 AM\n12:00 AM\nNA\n0\n5\n0\nOpen\nIn Person\n\n\nFall 2019\nMAIN\nRegular Academic Session\nABS\n593A\n4\n45397\n8/26/2019\n12/11/2019\n1\n-\n\nInd Study\n1\n1\n9\nInternship in Applied Biosci\n-\n\n12:00 AM\n12:00 AM\nNA\n1\n5\n0\nOpen\nIn Person\n\n\nFall 2019\nMAIN\nRegular Academic Session\nABS\n593A\n5\n45398\n8/26/2019\n12/11/2019\n1\n-\n\nInd Study\n1\n1\n9\nInternship in Applied Biosci\n-\n\n12:00 AM\n12:00 AM\nNA\n0\n5\n0\nOpen\nIn Person\n\n\nFall 2019\nMAIN\nRegular Academic Session\nABS\n593A\n6\n47657\n8/26/2019\n12/11/2019\n1\n-\n\nInd Study\n1\n1\n9\nInternship in Applied Biosci\n-\n\n12:00 AM\n12:00 AM\nNA\n0\n5\n0\nOpen\nIn Person"
+  },
+  {
+    "objectID": "proposal.html#analysis-plan",
+    "href": "proposal.html#analysis-plan",
+    "title": "Descriptive Analysis of Grade Outcomes",
+    "section": "Analysis plan",
+    "text": "Analysis plan\nData Collection\n\nHistorical Grade Data: Collect historical grade data from the University of Arizona for the years before, during, and after the COVID-19 pandemic. This data should include information on grade value outcomes for courses by semester.\nCourse Attributes Data: Gather data on course attributes such as class size, instructional format (online, hybrid, in-person), faculty information, time and day of the class offering, and any other relevant features that might influence grade outcomes.\n\nExploratory Data Analysis (EDA)\n\nDescriptive Statistics: Calculate summary statistics for overall grade distributions, college-wise, department-wise, and course-level. Examine mean, median,sums, and any potential outliers.\n\nPattern Analysis\n\nClustering: Utilize clustering techniques to group colleges, departments, and courses based on similar grade outcomes. Evaluate if specific clusters show distinct patterns during the pandemic.\nClassification: Apply classification algorithms to identify factors influencing grade outcomes. Investigate if colleges, departments, or specific course attributes significantly contribute to predicting grade results.\nAnomaly Detection: Identify anomalies in grade distributions, focusing on courses or departments that experienced unexpected changes during the pandemic. Conduct a fine-grained inspection of these anomalies.\nTime Series Decomposition: Decompose the time series data to identify trends, seasonality, and residual components. Analyze if any irregularities in the residual component coincide with the pandemic period.\n\nPredictive Modeling\n\nFeature Selection: Select relevant course attributes for predictive modeling. Use domain knowledge and statistical methods to choose features that significantly impact grade outcomes.\nModel Development: Build predictive models using machine learning algorithms such as regression or classification. Split the data into training and testing sets to evaluate model performance.\n\nDecision Tree Analysis: Employ decision tree analysis to understand the hierarchy of factors influencing grade outcomes.\nRegression: Utilize regression for predictive model\n\nModel Evaluation: Assess the accuracy, precision, recall, and F1-score of the developed models. Compare models’ performance across different colleges, departments, and course levels.\nInterpretation: Interpret the results of the predictive models to understand the key factors influencing grade outcomes. Provide insights into how colleges, departments, and course attributes contribute to student success.\n\nReporting\n\nPrepare a comprehensive report summarizing the methodology, findings, recommendations and potential future research. This report will include visualizations such as charts and graphs to enhance the presentation of results. Clearly communicate the findings of the study in an effort to student support services and academic planning at the University of Arizona."
+  },
+  {
+    "objectID": "proposal.html#weekly-work-plan-and-responsibilities",
+    "href": "proposal.html#weekly-work-plan-and-responsibilities",
+    "title": "Descriptive Analysis of Grade Outcomes",
+    "section": "Weekly Work Plan and Responsibilities",
+    "text": "Weekly Work Plan and Responsibilities\nWeek 1 Nov 12th - Nov 18th\n\nFinalize proposal - group\nClean data - Group\nExploratory Data Analysis\n\nGrade Value Outcomes - Kristi, Rohit\nCourse Attributes - Dong, Anjani, Utkarsha\n\nClustering and Classification - Group\n\nWeek 2 Nov 19th - Nov 25th\n\nAnomaly Detection - Rohit, Kristi\nTime Series Analysis - Anjani, Utkarsha, Dong\n\nWeek 3 Nov 26th - Dec 2nd\n\nDecision Tree Analysis - Group\nRegression Predictive Model - Group \nRough Draft of Write-Up - Dong and Kristi\nRough Draft of Abstract - Dong and Kristi\nRough Draft of Presentation - Rohit, Anjani, Utkarsha\n\nWeek 4 Dec 3rd - Dec 11th\n\nFinalize Write-Up - Group\nFinalize Abstract - Group\nFinalize Presentation - Group\nDeliver Final Project Materials and Presentation - Group"
+  },
+  {
+    "objectID": "proposal.html#repo-organization",
+    "href": "proposal.html#repo-organization",
+    "title": "Descriptive Analysis of Grade Outcomes",
+    "section": "Repo Organization",
+    "text": "Repo Organization\nThe following are the folders involved in the Project repository.\n\ndata/\nUsed for storing any necessary data files for the project, such as input files.\n\n\nimages/\nUsed for storing image files used in the project.\n\n\nextra/\nUsed to brainstorm our analysis which won’t impact our project workflow.\n\n\nfreeze/\nThis folder is used to store the generated files during the build process. These files represent the frozen state of the website at a specific point in time.\n\n\ngithub/\nFolder for storing github templates and workflow.\n\n\n.git\nhidden directory at the root of the repository that contains the internal data structure and configuration files\n\n\nabout.qmd\ncontains information about Project title and team members.\n\n\npresentation.qmd\ncontains the presentation for final project\n\n\nproposal.qmd\ncontains the proposal for the final project\n\n\nindex.qmd\nContains the abstract for the project.\n\n\npresentation.qmd\nincludes information about the presentations of the project"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Project title",
+    "section": "",
+    "text": "Add project abstract here."
+  },
+  {
+    "objectID": "index.html#abstract",
+    "href": "index.html#abstract",
+    "title": "Project title",
+    "section": "",
+    "text": "Add project abstract here."
+  },
+  {
+    "objectID": "presentation.html#quarto",
+    "href": "presentation.html#quarto",
+    "title": "Descriptive analysis of grade outcomes",
+    "section": "Quarto",
+    "text": "Quarto\n\nThe presentation is created using the Quarto CLI\n## sets the start of a new slide"
+  },
+  {
+    "objectID": "presentation.html#layouts",
+    "href": "presentation.html#layouts",
+    "title": "Descriptive analysis of grade outcomes",
+    "section": "Layouts",
+    "text": "Layouts\nYou can use plain text\n\n\n\nor bullet points1\n\n\nor in two columns\n\n\n\nlike\nthis\n\nAnd add footnotes"
+  },
+  {
+    "objectID": "presentation.html#code",
+    "href": "presentation.html#code",
+    "title": "Descriptive analysis of grade outcomes",
+    "section": "Code",
+    "text": "Code\n\n\n# A tibble: 2 × 5\n  term        estimate std.error statistic       p.value\n  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;\n1 (Intercept)   25.3      3.08        8.22 0.00000000358\n2 speed         -0.116    0.0642     -1.81 0.0806       \n\n\n# A tibble: 1 × 12\n  r.squared adj.r.squared sigma statistic p.value    df logLik   AIC   BIC\n      &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n1    0.0983        0.0682  5.82      3.27  0.0806     1  -101.  207.  212.\n# ℹ 3 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;, nobs &lt;int&gt;"
+  },
+  {
+    "objectID": "presentation.html#plots",
+    "href": "presentation.html#plots",
+    "title": "Descriptive analysis of grade outcomes",
+    "section": "Plots",
+    "text": "Plots"
+  },
+  {
+    "objectID": "presentation.html#plot-and-text",
+    "href": "presentation.html#plot-and-text",
+    "title": "Descriptive analysis of grade outcomes",
+    "section": "Plot and text",
+    "text": "Plot and text\n\n\n\nSome text\ngoes here"
+  },
+  {
+    "objectID": "presentation.html#tables",
+    "href": "presentation.html#tables",
+    "title": "Descriptive analysis of grade outcomes",
+    "section": "Tables",
+    "text": "Tables\nIf you want to generate a table, make sure it is in the HTML format (instead of Markdown or other formats), e.g.,\n\n\n\n\n\nspecies\nisland\nbill_length_mm\nbill_depth_mm\nflipper_length_mm\nbody_mass_g\nsex\n\n\n\n\nAdelie\nTorgersen\n39.1\n18.7\n181\n3750\nmale\n\n\nAdelie\nTorgersen\n39.5\n17.4\n186\n3800\nfemale\n\n\nAdelie\nTorgersen\n40.3\n18.0\n195\n3250\nfemale\n\n\nAdelie\nTorgersen\nNA\nNA\nNA\nNA\nNA\n\n\nAdelie\nTorgersen\n36.7\n19.3\n193\n3450\nfemale\n\n\nAdelie\nTorgersen\n39.3\n20.6\n190\n3650\nmale"
+  },
+  {
+    "objectID": "presentation.html#images",
+    "href": "presentation.html#images",
+    "title": "Descriptive analysis of grade outcomes",
+    "section": "Images",
+    "text": "Images\n\nImage credit: Danielle Navarro, Percolate."
+  },
+  {
+    "objectID": "presentation.html#math-expressions",
+    "href": "presentation.html#math-expressions",
+    "title": "Descriptive analysis of grade outcomes",
+    "section": "Math Expressions",
+    "text": "Math Expressions\nYou can write LaTeX math expressions inside a pair of dollar signs, e.g. $\\alpha+\\beta$ renders \\(\\alpha + \\beta\\). You can use the display style with double dollar signs:\n$$\\bar{X}=\\frac{1}{n}\\sum_{i=1}^nX_i$$\n\\[\n\\bar{X}=\\frac{1}{n}\\sum_{i=1}^nX_i\n\\]\nLimitations:\n\nThe source code of a LaTeX math expression must be in one line, unless it is inside a pair of double dollar signs, in which case the starting $$ must appear in the very beginning of a line, followed immediately by a non-space character, and the ending $$ must be at the end of a line, led by a non-space character;\nThere should not be spaces after the opening $ or before the closing $."
+  },
+  {
+    "objectID": "presentation.html#feeling-adventurous",
+    "href": "presentation.html#feeling-adventurous",
+    "title": "Descriptive analysis of grade outcomes",
+    "section": "Feeling adventurous?",
+    "text": "Feeling adventurous?\n\nYou are welcomed to use the default styling of the slides. In fact, that’s what I expect majority of you will do. You will differentiate yourself with the content of your presentation.\nBut some of you might want to play around with slide styling. Some solutions for this can be found at https://quarto.org/docs/presentations/revealjs."
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "Descriptive analysis of grade outcomes",
+    "section": "",
+    "text": "This project was developed by [The Null Wranglers] For INFO 523 - Data Mining and Discovery at the University of Arizona, taught by Dr. Greg Chism. The team is comprised of the following team members.\n\nKrist Manasil : PhD in Infromation, First Year\nDong Chen : PhD in Higher Education , Second Year\nUtkarsha Patil : MS in Data Science, First Year\nAnajni Sowmya Bollapragada : MS in Data Science, First Year\nRohit Hemaraja : MS in Data Science, First Year"
+  }
+]
