@@ -38,7 +38,7 @@ The high-level goal of this study is to analyze and understand the grade outcome
 The first data set used for this analysis, is known as the DEW Rates, contains information about the breakdown of grade value outcomes during the academic years of 2018-19, 2019-20, and 2020-21 at the University of Arizona. The consists of 35697 observations of courses with 23 variables related to enrollment and grade values. Below is a description of the data:
 
 | Variable                     | Description                                                                                                                                                          |
-|------------------------------|------------------------------------------|
+|---------------|---------------------------------------------------------|
 | College                      | Identifies the college at the University of Arizona                                                                                                                  |
 | Department                   | Identifies which department within given college                                                                                                                     |
 | Subject.Code                 | Identifies the subject of the course with a 3 or 4 letter code                                                                                                       |
@@ -76,7 +76,7 @@ kable(head(dew_counts))
 The second data set used for this analysis, is known as the SY20 and SY21, contains information about course attributes for the academic years of 2019-20, and 2020-21 at the University of Arizona. Unfortunately the academic year of 2018-19 was unable to obtained for this study. There are over 260,000 observations of courses with 27 variable per observation.
 
 | Variable          | Description                                                       |
-|-----------------------|-------------------------------------------------|
+|------------------|------------------------------------------------------|
 | Term              | The term the course was offered                                   |
 | Campus            | The campus the course was offered at                              |
 | Session           | The type of session for the course - regular, first 7 weeks, etc, |
@@ -119,94 +119,121 @@ kable(head(sy20_data))
 
 ***Data Collection***
 
--    Historical Grade Data: Collect historical grade data from the University of Arizona for the years before, during, and after the COVID-19 pandemic. This data should include information on grade value outcomes for courses by semester.
+-   Historical Grade Data: Collect historical grade data from the University of Arizona for the years before, during, and after the COVID-19 pandemic. This data should include information on grade value outcomes for courses by semester.
 
 -   Course Attributes Data: Gather data on course attributes such as class size, instructional format (online, hybrid, in-person), faculty information, time and day of the class offering, and any other relevant features that might influence grade outcomes.
 
 ***Exploratory Data Analysis (EDA)***
 
-2.1 Descriptive Statistics
-
-Calculate summary statistics for overall grade distributions, college-wise, department-wise, and course-level. Examine mean, median, standard deviation, and any potential outliers.
+-   Descriptive Statistics: Calculate summary statistics for overall grade distributions, college-wise, department-wise, and course-level. Examine mean, median,sums, and any potential outliers.
 
 ***Pattern Analysis***
 
-3.1 Clustering
+-   Clustering: Utilize clustering techniques to group colleges, departments, and courses based on similar grade outcomes. Evaluate if specific clusters show distinct patterns during the pandemic.
 
-Utilize clustering techniques to group colleges, departments, and courses based on similar grade outcomes. Evaluate if specific clusters show distinct patterns during the pandemic.
+-   Classification: Apply classification algorithms to identify factors influencing grade outcomes. Investigate if colleges, departments, or specific course attributes significantly contribute to predicting grade results.
 
-3.2 Classification
+-   Anomaly Detection: Identify anomalies in grade distributions, focusing on courses or departments that experienced unexpected changes during the pandemic. Conduct a fine-grained inspection of these anomalies.
 
-Apply classification algorithms to identify factors influencing grade outcomes. Investigate if colleges, departments, or specific course attributes significantly contribute to predicting grade results.
-
-3.3 Anomaly Detection
-
-Identify anomalies in grade distributions, focusing on courses or departments that experienced unexpected changes during the pandemic. Conduct a fine-grained inspection of these anomalies.
-
-3.4 Time Series Decomposition
-
-Decompose the time series data to identify trends, seasonality, and residual components. Analyze if any irregularities in the residual component coincide with the pandemic period.
-
-3.5 Decision Tree Analysis
-
-Employ decision tree analysis to understand the hierarchy of factors influencing grade outcomes.
+-   Time Series Decomposition: Decompose the time series data to identify trends, seasonality, and residual components. Analyze if any irregularities in the residual component coincide with the pandemic period.
 
 ***Predictive Modeling***
 
-4.1 Feature Selection
+-   Feature Selection: Select relevant course attributes for predictive modeling. Use domain knowledge and statistical methods to choose features that significantly impact grade outcomes.
 
-Select relevant course attributes for predictive modeling. Use domain knowledge and statistical methods to choose features that significantly impact grade outcomes.
+-   Model Development: Build predictive models using machine learning algorithms such as regression or classification. Split the data into training and testing sets to evaluate model performance.
 
-4.2 Model Development
+    -   Decision Tree Analysis: Employ decision tree analysis to understand the hierarchy of factors influencing grade outcomes.
 
-Build predictive models using machine learning algorithms such as regression or classification. Split the data into training and testing sets to evaluate model performance.
+    -   Regression: Utilize regression for predictive model
 
-4.3 Model Evaluation
+-   Model Evaluation: Assess the accuracy, precision, recall, and F1-score of the developed models. Compare models' performance across different colleges, departments, and course levels.
 
-Assess the accuracy, precision, recall, and F1-score of the developed models. Compare models' performance across different colleges, departments, and course levels.
-
-4.4 Interpretation
-
-Interpret the results of the predictive models to understand the key factors influencing grade outcomes. Provide insights into how colleges, departments, and course attributes contribute to student success.
+-   Interpretation: Interpret the results of the predictive models to understand the key factors influencing grade outcomes. Provide insights into how colleges, departments, and course attributes contribute to student success.
 
 ***Reporting***
 
-5.1 Prepare a comprehensive report summarizing the methodology, findings, recommendations and potential future research. This report will include visualizations such as charts and graphs to enhance the presentation of results. Clearly communicate the findings of the study in an effort to student support services and academic planning at the University of Arizona.
+-   Prepare a comprehensive report summarizing the methodology, findings, recommendations and potential future research. This report will include visualizations such as charts and graphs to enhance the presentation of results. Clearly communicate the findings of the study in an effort to student support services and academic planning at the University of Arizona.
 
-5.2 Future Research
-
-Highlight areas for future research based on gaps identified during the analysis. This could involve further investigation into specific anomalies or exploring the long-term effects of the pandemic on student success.
-
--   A plan for answering each of the questions including the variables involved, variables to be created (if any), external data to be merged in (if any).
-
-**Week 1 Nov 1st - Nov 7th**
+**Week 1 Nov 12th - Nov 18th**
 
 -   Finalize proposal - group
 
--   Clean and explore data - group
+-   Clean data - Group
 
--   Assign roles and responsibilities
+-   Exploratory Data Analysis
 
-**Week 2 Nov 8th - Nov 14th**
+    -   Grade Value Outcomes - Kristi, Rohit
 
--   Exploratory data analysis
+    -   Course Attributes - Dong, Anjani, Utkarsha
 
--   Continue data preprocessing.
+-   Clustering and Classification - Group
 
--   Conduct exploratory data analysis (EDA) to identify initial trends and patterns.
+**Week 2 Nov 19th - Nov 25th**
 
-**Week 3 Nov 15th - Nov 21st**
+-   Anomaly Detection - Rohit, Kristi
 
--   Anomaly and time series analysis 
+-   Time Series Analysis - Anjani, Utkarsha, Dong
 
-**Week 4 Nov 22nd - Nov 28th**
+**Week 3 Nov 26th - Dec 2nd**
 
--   Decision Tree Analysis
+-   Decision Tree Analysis - Group
+-   Regression Predictive Model - Group 
+-   Rough Draft of Write-Up - Dong and Kristi
+-   Rough Draft of Abstract - Dong and Kristi
+-   Rough Draft of Presentation - Rohit, Anjani, Utkarsha
 
-**Week 5 Nov 29th - Dec 5th**
+**Week 4 Dec 3rd - Dec 11th**
 
--   (Ambitious goal :))Predictive modeling if time permits
+-   Finalize Write-Up - Group
+-   Finalize Abstract - Group
+-   Finalize Presentation - Group
+-   Deliver Final Project Materials and Presentation - Group
 
-**Week 6 Dec 6th - 12th**
+## **Repo Organization**
 
--   Finalize the project and prepare for the presentation
+The following are the folders involved in the Project repository.
+
+#### data/
+
+Used for storing any necessary data files for the project, such as input files.
+
+#### images/
+
+Used for storing image files used in the project.
+
+#### extra/
+
+Used to brainstorm our analysis which won't impact our project workflow.
+
+#### freeze/
+
+This folder is used to store the generated files during the build process. These files represent the frozen state of the website at a specific point in time.
+
+#### github/
+
+Folder for storing github templates and workflow.
+
+#### .git
+
+hidden directory at the root of the repository that contains the internal data structure and configuration files
+
+#### about.qmd
+
+contains information about Project title and team members.
+
+#### presentation.qmd
+
+contains the presentation for final project
+
+#### proposal.qmd
+
+contains the proposal for the final project
+
+#### index.qmd
+
+Contains the abstract for the project.
+
+#### presentation.qmd
+
+includes information about the presentations of the project
